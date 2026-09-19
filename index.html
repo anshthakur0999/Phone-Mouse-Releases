@@ -57,36 +57,7 @@ nav .btn{padding:12px 22px}
 .cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px}
 
 /* hero illustration */
-.scene{position:relative;aspect-ratio:53/52;min-height:0}
-.laptop{
-  position:absolute;top:0;left:0;width:76%;aspect-ratio:4/2.7;
-  border:1px solid var(--line);border-radius:14px;background:var(--bg-2);
-  background-image:radial-gradient(#33372b 1.4px,transparent 1.4px);background-size:22px 22px
-}
-.laptop::after{content:"";position:absolute;left:-4%;right:-4%;bottom:-14px;height:8px;border-radius:4px;background:#2a2d24}
-.cursor{position:absolute;top:34%;left:26%;width:26px}
-.cursor path{fill:var(--lime)}
-.phone{
-  position:absolute;right:0;top:22%;z-index:1;width:34%;aspect-ratio:1/2.05;
-  border:1px solid var(--line);border-radius:26px;background:var(--bg-2);padding:12px;
-  display:flex;flex-direction:column;gap:10px
-}
-.pad{
-  flex:1;border:1px solid var(--line);border-radius:16px;
-  background-image:radial-gradient(#33372b 1.4px,transparent 1.4px);background-size:20px 20px;
-  display:grid;place-items:center
-}
-.keys{display:flex;gap:8px}
-.keys b{
-  flex:1;text-align:center;padding:14px 4px;border-radius:12px;font-size:12px;font-weight:700;white-space:nowrap;
-  background:var(--card);border:1px solid var(--line)
-}
-.keys b:first-child{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
-.link{position:absolute;left:-3%;top:53%;width:86%;height:37.5%;overflow:visible;z-index:2}
-.link path{fill:none;stroke:var(--lime);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linecap:round}
-.plug{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--lime);transform:translate(-50%,-50%);z-index:3}
-.plug.a{left:-4%;bottom:-10px}
-.plug.b{left:50%;bottom:0}
+.scene{display:block;width:100%;height:auto}
 
 /* sections */
 section{padding:100px 0;border-top:1px solid var(--line)}
@@ -175,10 +146,6 @@ footer a:hover{color:var(--lime)}
   body{font-size:16px}
   .hero .wrap,.split,.grid3,.grid2,.faq{grid-template-columns:1fr;gap:40px}
   .scene{order:-1}
-  .laptop{width:64%}
-  .phone{width:30%;top:24%;right:4px}
-  .link{left:-3%;top:45.5%;width:87%;height:38.5%}
-  .keys b{font-size:11px;padding:12px 2px;white-space:normal}
   .lead{max-width:none}
   section{padding:64px 0}
   nav a:not(.btn){display:none}
@@ -211,20 +178,9 @@ footer a:hover{color:var(--lime)}
         <a class="btn" href="#how">See how it works</a>
       </div>
     </div>
-    <div class="scene" aria-hidden="true">
-      <div class="laptop">
-        <svg class="cursor" viewBox="0 0 24 24"><path d="M5 2l14 11-6 .6 3.3 6.4-2.6 1.3L10.4 15 5 19z"/></svg>
-        <i class="plug a"></i>
-      </div>
-      <svg class="link" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 0 C 0 86, 66 116, 100 100"/>
-      </svg>
-      <div class="phone">
-        <div class="pad"></div>
-        <div class="keys"><b>Left click</b><b>Right click</b></div>
-        <i class="plug b"></i>
-      </div>
-    </div>
+    <img class="scene" src="phone-mouse-hero-illustration.png"
+         width="1520" height="1520" fetchpriority="high"
+         alt="A laptop and a phone connected by a USB cable, with the phone acting as a trackpad">
   </div>
 </div>
 
