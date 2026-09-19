@@ -6,6 +6,12 @@ No Wi-Fi, no Bluetooth, no account, no internet connection.
 
 **[Visit the website →](https://anshthakur0999.github.io/Phone-Mouse-Releases/)** · **[Download the latest release →](https://github.com/anshthakur0999/Phone-Mouse-Releases/releases/latest)**
 
+<p align="center">
+  <img src="screenshots/1-connect.png" width="30%" alt="Connect screen showing the setup checklist" />
+  <img src="screenshots/2-touchpad.png" width="30%" alt="Trackpad screen with click buttons" />
+  <img src="screenshots/3-settings.png" width="30%" alt="Settings screen with speed sliders and toggles" />
+</p>
+
 | Download | For |
 |---|---|
 | `PhoneMouse-1.0.0.apk` | Your Android phone (8.0 or newer) |
