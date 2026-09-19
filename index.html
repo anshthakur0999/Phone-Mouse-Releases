@@ -57,7 +57,7 @@ nav .btn{padding:12px 22px}
 .cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px}
 
 /* hero illustration */
-.scene{position:relative;min-height:520px}
+.scene{position:relative;aspect-ratio:53/52;min-height:0}
 .laptop{
   position:absolute;top:0;left:0;width:76%;aspect-ratio:4/2.7;
   border:1px solid var(--line);border-radius:14px;background:var(--bg-2);
@@ -82,11 +82,11 @@ nav .btn{padding:12px 22px}
   background:var(--card);border:1px solid var(--line)
 }
 .keys b:first-child{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
-.link{position:absolute;left:1%;top:55%;width:82%;height:38%;overflow:visible;z-index:2}
+.link{position:absolute;left:0;top:53%;width:83%;height:37.5%;overflow:visible;z-index:2}
 .link path{fill:none;stroke:var(--lime);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linecap:round}
 .plug{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--lime);transform:translate(-50%,-50%);z-index:3}
-.plug.a{left:1%;top:55%}
-.plug.b{left:83%;top:93%}
+.plug.a{left:0;bottom:-14px}
+.plug.b{left:50%;bottom:0}
 
 /* sections */
 section{padding:100px 0;border-top:1px solid var(--line)}
@@ -174,12 +174,10 @@ footer a:hover{color:var(--lime)}
   :root{--pad:24px}
   body{font-size:16px}
   .hero .wrap,.split,.grid3,.grid2,.faq{grid-template-columns:1fr;gap:40px}
-  .scene{min-height:320px;order:-1}
+  .scene{order:-1}
   .laptop{width:64%}
   .phone{width:30%;top:24%;right:4px}
-  .link{left:1%;top:50.5%;width:82%;height:39.2%}
-  .plug.a{left:1%;top:50.5%}
-  .plug.b{left:83%;top:89.7%}
+  .link{left:0;top:45.5%;width:84%;height:38.5%}
   .keys b{font-size:11px;padding:12px 2px;white-space:normal}
   .lead{max-width:none}
   section{padding:64px 0}
@@ -216,15 +214,15 @@ footer a:hover{color:var(--lime)}
     <div class="scene" aria-hidden="true">
       <div class="laptop">
         <svg class="cursor" viewBox="0 0 24 24"><path d="M5 2l14 11-6 .6 3.3 6.4-2.6 1.3L10.4 15 5 19z"/></svg>
+        <i class="plug a"></i>
       </div>
-      <i class="plug a" aria-hidden="true"></i>
-      <i class="plug b" aria-hidden="true"></i>
       <svg class="link" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 0 C 0 75, 75 115, 100 100"/>
+        <path d="M0 0 C 0 80, 70 112, 100 100"/>
       </svg>
       <div class="phone">
         <div class="pad"></div>
         <div class="keys"><b>Left click</b><b>Right click</b></div>
+        <i class="plug b"></i>
       </div>
     </div>
   </div>
