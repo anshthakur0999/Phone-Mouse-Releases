@@ -4,7 +4,7 @@ Use your Android phone as a trackpad for your Windows laptop, over the USB cable
 
 No Wi-Fi, no Bluetooth, no account, no internet connection.
 
-**[Download the latest release →](https://github.com/anshthakur0999/Phone-Mouse-Releases/releases/latest)**
+**[Visit the website →](https://anshthakur0999.github.io/Phone-Mouse-Releases/)** · **[Download the latest release →](https://github.com/anshthakur0999/Phone-Mouse-Releases/releases/latest)**
 
 | Download | For |
 |---|---|
