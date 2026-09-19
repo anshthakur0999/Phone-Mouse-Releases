@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phone Mouse — Turn your phone into a mouse</title>
+<meta name="description" content="Use your Android phone as a trackpad for your Windows laptop, over the USB cable. No Wi-Fi, no Bluetooth, no rooting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0e0c; --bg-2:#131512; --card:#181a16; --line:#26291f;
+  --ink:#eceee4; --muted:#9a9e90; --lime:#c6f24e; --lime-ink:#0d0e0c;
+  --max:1280px; --pad:80px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);
+  font:400 17px/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.eyebrow{
+  font:500 12px/1 "JetBrains Mono",monospace;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--lime);margin:0 0 20px
+}
+.eyebrow.dim{color:var(--muted)}
+.lead{color:var(--muted);max-width:34ch;margin:24px 0 0}
+
+/* buttons */
+.btn{
+  display:inline-block;padding:16px 28px;border-radius:12px;font-weight:700;
+  text-decoration:none;border:1px solid var(--line);background:var(--card);
+}
+.btn.primary{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
+.btn:hover{filter:brightness(1.12)}
+
+/* header */
+header{position:sticky;top:0;z-index:10;background:rgba(13,14,12,.86);backdrop-filter:blur(10px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:28px;padding-bottom:28px;gap:24px}
+.logo{display:flex;align-items:center;gap:12px;font:700 13px/1.25 "JetBrains Mono",monospace;letter-spacing:.14em;text-decoration:none}
+.logo span{white-space:nowrap}
+.logo svg{width:22px;flex:none}
+.logo svg path{fill:var(--lime)}
+nav{display:flex;align-items:center;gap:36px;font-weight:600;font-size:15px}
+nav a{text-decoration:none}
+nav a:hover{color:var(--lime)}
+nav .btn{padding:12px 22px}
+
+/* hero */
+.hero{padding:70px 0 120px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero h1{font-size:clamp(44px,5.6vw,76px)}
+.cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px}
+
+/* hero illustration */
+.scene{position:relative;min-height:520px}
+.laptop{
+  position:absolute;top:0;left:0;width:76%;aspect-ratio:4/2.7;
+  border:1px solid var(--line);border-radius:14px;background:var(--bg-2);
+  background-image:radial-gradient(#33372b 1.4px,transparent 1.4px);background-size:22px 22px
+}
+.laptop::after{content:"";position:absolute;left:-4%;right:-4%;bottom:-14px;height:8px;border-radius:4px;background:#2a2d24}
+.cursor{position:absolute;top:34%;left:26%;width:26px}
+.cursor path{fill:var(--lime)}
+.phone{
+  position:absolute;right:0;top:22%;width:34%;aspect-ratio:1/2.05;
+  border:1px solid var(--line);border-radius:26px;background:var(--bg-2);padding:12px;
+  display:flex;flex-direction:column;gap:10px
+}
+.pad{
+  flex:1;border:1px solid var(--line);border-radius:16px;
+  background-image:radial-gradient(#33372b 1.4px,transparent 1.4px);background-size:20px 20px;
+  display:grid;place-items:center
+}
+.keys{display:flex;gap:8px}
+.keys b{
+  flex:1;text-align:center;padding:14px 4px;border-radius:12px;font-size:12px;font-weight:700;white-space:nowrap;
+  background:var(--card);border:1px solid var(--line)
+}
+.keys b:first-child{background:var(--lime);color:var(--lime-ink);border-color:var(--lime)}
+.link{position:absolute;left:44%;top:57%;width:26%;height:24%;overflow:visible}
+.link path{fill:none;stroke:var(--lime);stroke-width:2}
+.link circle{fill:var(--lime)}
+
+/* sections */
+section{padding:100px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(30px,3.2vw,42px)}
+.alt{background:var(--bg-2)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px}
+.card h3{font-size:20px;margin-bottom:12px}
+.card p{color:var(--muted);font-size:15px;margin:0}
+.icon{width:34px;height:34px;border-radius:9px;background:var(--lime);display:grid;place-items:center;margin-bottom:22px}
+.icon svg{width:18px;height:18px;stroke:var(--lime-ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* steps */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.steps{display:grid;gap:0}
+.step{display:grid;grid-template-columns:auto 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step em{font:500 14px/1 "JetBrains Mono",monospace;color:var(--lime);font-style:normal;padding-top:4px}
+.step h3{font-size:19px;margin-bottom:8px}
+.step p{color:var(--muted);font-size:15px;margin:0}
+
+/* feature cards */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px}
+.card h3+p{margin-bottom:34px}
+.rows{list-style:none;margin:0;padding:0;font:400 13px/1 "JetBrains Mono",monospace;letter-spacing:.06em}
+.rows li{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-top:1px solid var(--line);color:var(--muted);text-transform:uppercase}
+.rows li b{color:var(--ink);font-weight:400}
+.settings{display:grid;gap:4px}
+.setting{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;border-top:1px solid var(--line);font-weight:700;font-size:15px}
+.setting:first-child{border-top:0}
+.setting .val{font:500 14px "JetBrains Mono",monospace;color:var(--lime)}
+.setting label{cursor:pointer}
+/* range: lime fill via gradient driven by --p */
+.slider{
+  grid-column:1/-1;margin:0 0 18px;width:100%;height:18px;cursor:pointer;
+  -webkit-appearance:none;appearance:none;background:transparent;display:block
+}
+.slider::-webkit-slider-runnable-track{
+  height:4px;border-radius:2px;
+  background:linear-gradient(var(--lime),var(--lime)) 0/var(--p,50%) 100% no-repeat var(--line)
+}
+.slider::-moz-range-track{height:4px;border-radius:2px;background:var(--line)}
+.slider::-moz-range-progress{height:4px;border-radius:2px;background:var(--lime)}
+.slider::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;margin-top:-7px;
+  width:18px;height:18px;border-radius:50%;background:var(--lime);border:0
+}
+.slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--lime);border:0}
+.slider:focus-visible{outline:2px solid var(--lime);outline-offset:6px}
+/* switch: checkbox */
+.sw{
+  -webkit-appearance:none;appearance:none;margin:0;flex:none;cursor:pointer;
+  width:46px;height:26px;border-radius:13px;background:#3a3e33;position:relative;
+  transition:background .18s ease
+}
+.sw::after{
+  content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+  background:#9a9e90;transition:left .18s ease,background .18s ease
+}
+.sw:checked{background:var(--lime)}
+.sw:checked::after{left:23px;background:var(--lime-ink)}
+.sw:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:0 60px;margin-top:48px}
+.faq div{padding:26px 0;border-top:1px solid var(--line)}
+.faq h3{font-size:17px;margin-bottom:10px}
+.faq p{color:var(--muted);font-size:15px;margin:0}
+
+/* closer */
+.closer{background:var(--lime);color:var(--lime-ink);text-align:center;border:0}
+.closer h2{font-size:clamp(34px,4.4vw,56px)}
+.closer p{max-width:36ch;margin:20px auto 0;font-weight:600}
+.closer .cta{justify-content:center;margin-top:36px}
+.closer .btn{background:transparent;border-color:rgba(13,14,12,.35)}
+.closer .btn.primary{background:var(--lime-ink);color:var(--lime);border-color:var(--lime-ink)}
+.closer small a{color:inherit}
+.closer small{display:block;margin-top:28px;font:500 12px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;opacity:.65}
+
+footer .wrap{display:flex;justify-content:space-between;gap:24px;padding-top:40px;padding-bottom:40px;font:500 12px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+footer a{text-decoration:none}
+footer a:hover{color:var(--lime)}
+
+@media (max-width:900px){
+  :root{--pad:24px}
+  body{font-size:16px}
+  .hero .wrap,.split,.grid3,.grid2,.faq{grid-template-columns:1fr;gap:40px}
+  .scene{min-height:320px;order:-1}
+  .laptop{width:64%}
+  .phone{width:30%;top:24%;right:4px}
+  .keys b{font-size:11px;padding:12px 2px;white-space:normal}
+  .lead{max-width:none}
+  section{padding:64px 0}
+  nav a:not(.btn){display:none}
+  .faq div:nth-child(2){border-top:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 2l14 11-6 .6 3.3 6.4-2.6 1.3L10.4 15 5 19z"/></svg><span>Phone Mouse</span></a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn" href="#get">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow dim">Android to Windows · over USB</p>
+      <h1>Turn your<br>phone into<br>a mouse.</h1>
+      <p class="lead">Plug in a cable, open the app, and steer your Windows laptop's cursor from your phone. No Wi-Fi to join, nothing to pair, no rooting.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/anshthakur0999/Phone-Mouse-Releases/releases/latest/download/PhoneMouse-1.0.0.apk">Download for Android</a>
+        <a class="btn" href="#how">See how it works</a>
+      </div>
+    </div>
+    <div class="scene" aria-hidden="true">
+      <div class="laptop">
+        <svg class="cursor" viewBox="0 0 24 24"><path d="M5 2l14 11-6 .6 3.3 6.4-2.6 1.3L10.4 15 5 19z"/></svg>
+      </div>
+      <svg class="link" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M2 2 C 2 60, 40 70, 98 78"/><circle cx="2" cy="2" r="4"/>
+      </svg>
+      <div class="phone">
+        <div class="pad"></div>
+        <div class="keys"><b>Left click</b><b>Right click</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Why it works</p>
+    <h2>Built around the cable</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></div>
+        <h3>Cable, not Wi-Fi</h3>
+        <p>The link runs over your USB cable, so there is no network to join and nothing to pair.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></div>
+        <h3>No rooting</h3>
+        <p>It works through USB debugging on a normal Android phone. Your phone stays as it is.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 2l14 11-6 .6 3.3 6.4-2.6 1.3L10.4 15 5 19z"/></svg></div>
+        <h3>A real cursor</h3>
+        <p>The Windows companion moves the actual system cursor, so it works in any app you use.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">How it works</p>
+      <h2>Three steps to a working cursor</h2>
+      <p class="lead">The app checks each step for you and tells you when your laptop is ready.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <em>01</em>
+        <div><h3>Install both apps</h3><p>Put the Android app on your phone and the companion app on your Windows laptop.</p></div>
+      </div>
+      <div class="step">
+        <em>02</em>
+        <div><h3>Plug in and allow USB debugging</h3><p>Connect the cable and accept the USB debugging prompt on your phone.</p></div>
+      </div>
+      <div class="step">
+        <em>03</em>
+        <div><h3>Start using as mouse</h3><p>Open the touchpad and move your finger. The cursor follows.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Features</p>
+    <h2>Feels like a trackpad, tuned to your hand</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3>Touch it like a trackpad</h3>
+        <p>One big pad for your finger, with two large buttons under your thumb.</p>
+        <ul class="rows">
+          <li>Tap <b>Left click</b></li>
+          <li>Two-finger tap <b>Right click</b></li>
+          <li>Two-finger drag <b>Scroll</b></li>
+          <li>Big buttons <b>Click without tapping</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Tune it in Settings</h3>
+        <div class="settings">
+          <div class="setting"><label for="ptr">Pointer speed</label> <span class="val" id="ptr-v">6</span></div>
+          <input class="slider" type="range" id="ptr" min="1" max="10" value="6" style="--p:56%" aria-describedby="ptr-v">
+          <div class="setting"><label for="scr">Scroll speed</label> <span class="val" id="scr-v">4</span></div>
+          <input class="slider" type="range" id="scr" min="1" max="10" value="4" style="--p:33%" aria-describedby="scr-v">
+          <div class="setting"><label for="t2c">Tap to click</label> <input class="sw" type="checkbox" id="t2c" checked></div>
+          <div class="setting"><label for="nat">Natural scrolling</label> <input class="sw" type="checkbox" id="nat"></div>
+          <div class="setting"><label for="hap">Haptic feedback</label> <input class="sw" type="checkbox" id="hap" checked></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <p class="eyebrow dim">FAQ</p>
+    <h2>Before you plug in</h2>
+    <div class="faq">
+      <div><h3>Do I need to root my phone?</h3><p>No. It uses USB debugging on a normal, unrooted Android phone.</p></div>
+      <div><h3>Does it work over Wi-Fi or Bluetooth?</h3><p>Not yet. This version runs over a USB cable only.</p></div>
+      <div><h3>Which laptops does it work with?</h3><p>Windows 10 and 11 laptops (64-bit). The companion app runs on Windows and moves the system cursor.</p></div>
+      <div><h3>Which phones does it need?</h3><p>An Android phone with USB debugging. Android 8.0 or newer.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="get" class="closer">
+  <div class="wrap">
+    <h2>Put your phone to work.</h2>
+    <p>Get the Android app and the Windows companion, then plug in.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/anshthakur0999/Phone-Mouse-Releases/releases/latest/download/PhoneMouse-1.0.0.apk">Download for Android</a>
+      <a class="btn" href="https://github.com/anshthakur0999/Phone-Mouse-Releases/releases/latest/download/PhoneMouseSetup-1.0.0.exe">Download for Windows</a>
+    </div>
+    <small><a href="https://github.com/anshthakur0999/Phone-Mouse-Releases/releases/latest">All releases</a> · Version 1.0.0</small>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Phone Mouse</span>
+    <span><a href="https://github.com/anshthakur0999/Phone-Mouse-Releases">Source</a> · <a href="https://github.com/anshthakur0999/Phone-Mouse-Releases/issues">Contact</a></span>
+  </div>
+</footer>
+
+<script>
+for (const [id, out] of [['ptr','ptr-v'],['scr','scr-v']]) {
+  const r = document.getElementById(id), v = document.getElementById(out);
+  const sync = () => {
+    v.textContent = r.value;
+    r.style.setProperty('--p', (r.value - r.min) / (r.max - r.min) * 100 + '%');
+  };
+  r.addEventListener('input', sync);
+  sync();
+}
+</script>
+</body>
+</html>
